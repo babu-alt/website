@@ -1,6 +1,6 @@
 pipeline{
       agent any
-      Stages{
+      stages{
           stage('Git-checkout'){
              steps{
                  echo "Checkout from git repo!!";
