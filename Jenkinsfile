@@ -1,25 +1,28 @@
 pipeline{
       agent any
       Stages{
-          stage('compile'){
+          stage('Git-checkout'){
              steps{
-                 echo "compile succesfully!!";
+                 echo "Checkout from git repo!!";
+                   git 'https://github.com/babu-alt/website.git'
              }
           }
-          stage('Junit'){
+          stage('Build'){
               steps{
-                  echo "Junit pass successfully";
+                  echo "Building the checkout project";
+                    bat Build.bat
              }
           }
           stage('Quality-Gate'){
              steps{
-                 echo "SonarQube Quality Gate Pass successfully";
-               /*sh exit("1");*/
+                 echo "Verifying Quality Gates";
+                   bat Quality.bat
              }
           }
           stage('Deploy'){
              steps{
-                 echo "Pass";
+                 echo "Deploy to stage environment for more test ";
+                   bat Deploy.bat
              }
           }
       }
